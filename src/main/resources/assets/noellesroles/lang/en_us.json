@@ -13,8 +13,8 @@
   "announcement.goals.noellesroles.conductor": "Use the master key to open up every door on the train!",
   "announcement.role.noellesroles.conductor": "Conductor",
 
-  "announcement.goals.noellesroles.the_insane_damned_paranoid_killer": "I hear dead people.",
-  "announcement.role.noellesroles.the_insane_damned_paranoid_killer": "The Insane Damned Paranoid Killer Of Doom Death Destruction And Waffles",
+  "announcement.goals.noellesroles.mystic": "You can speak to the voices beyond.",
+  "announcement.role.noellesroles.mystic": "Mystic",
 
 
   "announcement.goals.noellesroles.bartender": "See players that drink through walls!",
@@ -83,6 +83,7 @@
   "item.noellesroles.delusion_vial.tooltip": "Right click on food/drink trays to use\nCreates fakes poison, making the consumer of the poisoned item\nthink they are poisoned, but have no physical effect.",
   "item.noellesroles.role_mine": "Role Mine",
   "item.noellesroles.role_mine.tooltip": "Right click to Place down on Floors or Ceilings.\nInvisible to other players, both placed and in hand.",
+  "item.noellesroles.crystal_ball": "Crystal Ball",
 
   "death_reason.wathe.gun_shot": "a bullet.",
   "death_reason.wathe.knife_stab": "a knife!",
@@ -93,6 +94,8 @@
   "death_reason.wathe.fell_out_of_train": "being ran over.",
   "death_reason.noellesroles.voodoo": "voodoo magic.",
   "death_reason.noellesroles.modded_backfire": "guilt.",
+
+  "effect.noellesroles.seance_effect": "Séance",
 
   "tip.phantom": "Use %s to go invisible!",
   "tip.recaller.place": "Use %s to save your location!",

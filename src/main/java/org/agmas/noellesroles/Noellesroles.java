@@ -91,7 +91,7 @@ public class Noellesroles implements ModInitializer {
     public static Identifier CHAMELEON_ID = Identifier.of(MOD_ID, "chameleon");
     public static Identifier GRAVEROBBER_ID = Identifier.of(MOD_ID, "graverobber");
     public static Identifier FEATHER_ID = Identifier.of(MOD_ID, "feather");
-    public static Identifier THE_INSANE_DAMNED_PARANOID_KILLER_OF_DOOM_DEATH_DESTRUCTION_AND_WAFFLES_ID = Identifier.of(MOD_ID, "the_insane_damned_paranoid_killer");
+    public static Identifier MYSTIC_ID = Identifier.of(MOD_ID, "mystic");
 
     public static HashMap<Role, RoleAnnouncementTexts.RoleAnnouncementText> roleRoleAnnouncementTextHashMap = new HashMap<>();
     public static Role JESTER = WatheRoles.registerRole(new Role(JESTER_ID,new Color(255,86,243).getRGB() ,false,false, Role.MoodType.FAKE,Integer.MAX_VALUE,true));
@@ -105,7 +105,7 @@ public class Noellesroles implements ModInitializer {
     public static Role PHANTOM =WatheRoles.registerRole(new Role(PHANTOM_ID, new Color(80, 5, 5, 192).getRGB(),false,true, Role.MoodType.FAKE,Integer.MAX_VALUE,true));
 
     public static Role VOODOO =WatheRoles.registerRole(new Role(VOODOO_ID, new Color(128, 114, 253).getRGB(),true,false,Role.MoodType.REAL, WatheRoles.CIVILIAN.getMaxSprintTime(),false));
-    public static Role THE_INSANE_DAMNED_PARANOID_KILLER_OF_DOOM_DEATH_DESTRUCTION_AND_WAFFLES =WatheRoles.registerRole(new Role(THE_INSANE_DAMNED_PARANOID_KILLER_OF_DOOM_DEATH_DESTRUCTION_AND_WAFFLES_ID, new Color(255, 0, 0, 192).getRGB(),false,true, Role.MoodType.FAKE,Integer.MAX_VALUE,true));
+    public static Role MYSTIC =WatheRoles.registerRole(new Role(MYSTIC_ID, new Color(139, 68, 234, 192).getRGB(),true,false, Role.MoodType.REAL,WatheRoles.CIVILIAN.getMaxSprintTime(),false));
     public static Role TRAPPER =WatheRoles.registerRole(new Role(TRAPPER_ID, new Color(132, 186, 167).getRGB(),true,false,Role.MoodType.REAL, WatheRoles.CIVILIAN.getMaxSprintTime(),false));
     public static Role CORONER =WatheRoles.registerRole(new Role(CORONER_ID, new Color(122, 122, 122).getRGB(),true,false,Role.MoodType.REAL, WatheRoles.CIVILIAN.getMaxSprintTime(),false));
 
@@ -121,7 +121,7 @@ public class Noellesroles implements ModInitializer {
 
     public static Modifier TINY = HMLModifiers.registerModifier(new Modifier(TINY_ID, new Color(255, 166, 0).getRGB(), new ArrayList<>(List.of(MORPHLING)),null,false,false));
     public static Modifier CHAMELEON = HMLModifiers.registerModifier(new Modifier(CHAMELEON_ID, new Color(198, 255, 137, 255).getRGB(),null,null,false,false));
-    public static Modifier GUESSER = HMLModifiers.registerModifier(new Modifier(GUESSER_ID, new Color(158, 43, 25, 255).getRGB(),new ArrayList<>(List.of(THE_INSANE_DAMNED_PARANOID_KILLER_OF_DOOM_DEATH_DESTRUCTION_AND_WAFFLES)),null,true,false));
+    public static Modifier GUESSER = HMLModifiers.registerModifier(new Modifier(GUESSER_ID, new Color(158, 43, 25, 255).getRGB(),new ArrayList<>(List.of(MYSTIC)),null,true,false));
     public static Modifier GRAVEROBBER = HMLModifiers.registerModifier(new Modifier(GRAVEROBBER_ID, new Color(174, 95, 95, 255).getRGB(),null,null,true,false));
     public static Modifier FEATHER = HMLModifiers.registerModifier(new Modifier(FEATHER_ID, new Color(255, 236, 161, 255).getRGB(),null,null,false,false));
 
@@ -164,12 +164,14 @@ public class Noellesroles implements ModInitializer {
         NoellesRolesConfig.HANDLER.load();
         ModItems.init();
         NoellesRolesEntities.init();
+        ModEffects.init();
 
         Harpymodloader.setRoleMaximum(CONDUCTOR_ID,1);
         Harpymodloader.setRoleMaximum(EXECUTIONER_ID,1);
         Harpymodloader.setRoleMaximum(VULTURE_ID,1);
         Harpymodloader.setRoleMaximum(JESTER_ID,1);
         Harpymodloader.setRoleMaximum(BETTER_VIGILANTE_ID,1);
+        Harpymodloader.setRoleMaximum(MIMIC_ID,1);
 
         PayloadTypeRegistry.playC2S().register(MorphC2SPacket.ID, MorphC2SPacket.CODEC);
         PayloadTypeRegistry.playC2S().register(AbilityC2SPacket.ID, AbilityC2SPacket.CODEC);
@@ -328,8 +330,8 @@ public class Noellesroles implements ModInitializer {
             if (!HarpyModLoaderConfig.HANDLER.instance().disabled.contains(BETTER_VIGILANTE_ID.toString())) {
                 HarpyModLoaderConfig.HANDLER.instance().disabled.add(BETTER_VIGILANTE_ID.toString());
             }
-            if (!HarpyModLoaderConfig.HANDLER.instance().disabled.contains(THE_INSANE_DAMNED_PARANOID_KILLER_OF_DOOM_DEATH_DESTRUCTION_AND_WAFFLES_ID.toString())) {
-                HarpyModLoaderConfig.HANDLER.instance().disabled.add(THE_INSANE_DAMNED_PARANOID_KILLER_OF_DOOM_DEATH_DESTRUCTION_AND_WAFFLES_ID.toString());
+            if (!HarpyModLoaderConfig.HANDLER.instance().disabled.contains(MYSTIC_ID.toString())) {
+                HarpyModLoaderConfig.HANDLER.instance().disabled.add(MYSTIC.toString());
             }
             HarpyModLoaderConfig.HANDLER.save();
         }
@@ -380,7 +382,7 @@ public class Noellesroles implements ModInitializer {
                         context.player().addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 40, 2));
                         if (vulturePlayerComponent.bodiesEaten >= vulturePlayerComponent.bodiesRequired) {
                             ArrayList<Role> shuffledKillerRoles = new ArrayList<>(WatheRoles.ROLES);
-                            shuffledKillerRoles.removeIf(role -> Harpymodloader.NON_MURDER_ROLES.contains(role) || Harpymodloader.VANNILA_ROLES.contains(role) || !role.canUseKiller() || HarpyModLoaderConfig.HANDLER.instance().disabled.contains(role.identifier().getPath()));
+                            shuffledKillerRoles.removeIf(role -> Harpymodloader.VANNILA_ROLES.contains(role) || !role.canUseKiller() || HarpyModLoaderConfig.HANDLER.instance().disabled.contains(role.identifier().getPath()));
                             if (shuffledKillerRoles.isEmpty()) shuffledKillerRoles.add(WatheRoles.KILLER);
                             Collections.shuffle(shuffledKillerRoles);
 

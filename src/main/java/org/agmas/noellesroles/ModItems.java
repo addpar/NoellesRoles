@@ -11,7 +11,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
 import org.agmas.noellesroles.item.FakeKnifeItem;
 import org.agmas.noellesroles.item.RoleMineItem;
-
+import org.agmas.noellesroles.item.CrystalBallItem;
 public class ModItems {
     public static void init() {
         GameConstants.ITEM_COOLDOWNS.put(FAKE_REVOLVER, GameConstants.getInTicks(0,8));
@@ -40,6 +40,10 @@ public class ModItems {
     public static final Item ROLE_MINE = register(
             new RoleMineItem(new Item.Settings().maxCount(1)),
             "role_mine"
+    );
+    public static final Item CRYSTAL_BALL = register(
+            new CrystalBallItem(new Item.Settings().maxCount(1)),
+            "crystal_ball"
     );
     public static Item register(Item item, String id) {
         // Create the identifier for the item.

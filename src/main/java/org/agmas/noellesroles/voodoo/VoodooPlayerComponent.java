@@ -12,7 +12,7 @@ import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
 import java.util.UUID;
 
-public class VoodooPlayerComponent implements AutoSyncedComponent {
+public class    VoodooPlayerComponent implements AutoSyncedComponent {
     public static final ComponentKey<VoodooPlayerComponent> KEY = ComponentRegistry.getOrCreate(Identifier.of(Noellesroles.MOD_ID, "voodoo"), VoodooPlayerComponent.class);
     private final PlayerEntity player;
     public UUID target;

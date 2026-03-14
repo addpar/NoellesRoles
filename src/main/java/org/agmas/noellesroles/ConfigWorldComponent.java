@@ -29,6 +29,8 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
     public int defenseVialPrice = 100;
     public int maximumDefenseVials = 0;
     public int roleMinePrice = 100;
+    public int maximumCrystalBalls = 0;
+    public int crystalBallPrice = 200;
     private final World world;
 
     public void reset() {
@@ -50,6 +52,8 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
         defenseVialPrice = NoellesRolesConfig.HANDLER.instance().defenseVialPrice;
         roleMinePrice = NoellesRolesConfig.HANDLER.instance().roleMinePrice;
         maximumDefenseVials = NoellesRolesConfig.HANDLER.instance().maximumDefenseVials;
+        crystalBallPrice = NoellesRolesConfig.HANDLER.instance().crystalBallPrice;
+        maximumCrystalBalls = NoellesRolesConfig.HANDLER.instance().maximumCrystalBalls;
 
         tag.putBoolean("insaneSeesMorphs", this.insaneSeesMorphs);
         tag.putBoolean("naturalVoodoosAllowed", this.naturalVoodoosAllowed);
@@ -58,6 +62,8 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
 
         tag.putInt("defenseVialPrice", this.defenseVialPrice);
         tag.putInt("roleMinePrice", this.roleMinePrice);
+        tag.putInt("crystalBallPrice", this.crystalBallPrice);
+        tag.putInt("maximumCrystalBalls", this.maximumCrystalBalls);
         tag.putInt("maximumDefenseVials", this.maximumDefenseVials);
     }
 
@@ -72,6 +78,8 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
         if (tag.contains("defenseVialPrice"))   this.defenseVialPrice = tag.getInt("defenseVialPrice");
         if (tag.contains("roleMinePrice"))   this.roleMinePrice = tag.getInt("roleMinePrice");
         if (tag.contains("maximumDefenseVials"))   this.maximumDefenseVials = tag.getInt("maximumDefenseVials");
+        if (tag.contains("crystalBallPrice"))      this.crystalBallPrice = tag.getInt("crystalBallPrice");
+        if (tag.contains("maximumCrystalBalls"))      this.maximumCrystalBalls = tag.getInt("maximumCrystalBalls");
     }
 
     @Override

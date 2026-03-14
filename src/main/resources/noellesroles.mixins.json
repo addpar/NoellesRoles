@@ -26,6 +26,7 @@
     "jester.JesterItemEntityMixin",
     "jester.JesterJestMixin",
     "morphling.MorphlingReseterMixin",
+    "mystic.MysticPlayerShopComponentMixin",
     "noisemaker.NoisemakerKillMixin",
     "noisemaker.NoisemakerPlayerShopComponentMixin",
     "trapper.TrapperPlayerShopComponentMixin",

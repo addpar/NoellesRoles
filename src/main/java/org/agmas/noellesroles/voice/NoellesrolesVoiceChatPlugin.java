@@ -8,9 +8,14 @@ import de.maxhenkel.voicechat.api.events.EventRegistration;
 import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
 import dev.doctor4t.wathe.cca.GameWorldComponent;
 import dev.doctor4t.wathe.game.GameFunctions;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.GameMode;
 import org.agmas.noellesroles.Noellesroles;
+
+import static org.agmas.noellesroles.ModEffects.Seance;
 
 public class NoellesrolesVoiceChatPlugin implements VoicechatPlugin {
     @Override
@@ -29,7 +34,7 @@ public class NoellesrolesVoiceChatPlugin implements VoicechatPlugin {
         GameWorldComponent gameWorldComponent = (GameWorldComponent) GameWorldComponent.KEY.get(spectator.getWorld());
         if (spectator.interactionManager.getGameMode().equals(GameMode.SPECTATOR)) {
             spectator.getWorld().getPlayers().forEach((p) -> {
-                if (gameWorldComponent.isRole(p, Noellesroles.THE_INSANE_DAMNED_PARANOID_KILLER_OF_DOOM_DEATH_DESTRUCTION_AND_WAFFLES) && GameFunctions.isPlayerAliveAndSurvival(p)) {
+                if (gameWorldComponent.isRole(p, Noellesroles.MYSTIC) && GameFunctions.isPlayerAliveAndSurvival(p)&& p.hasStatusEffect(Registries.STATUS_EFFECT.getEntry(Seance))) { // Please change from glowing later
                     if (spectator.distanceTo(p) <= api.getVoiceChatDistance()) {
                         VoicechatConnection con = api.getConnectionOf(p.getUuid());
                         api.sendLocationalSoundPacketTo(con, event.getPacket().locationalSoundPacketBuilder()

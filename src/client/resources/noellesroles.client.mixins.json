@@ -30,7 +30,8 @@
     "trapper.TrapperShopMixin",
     "voodoo.VoodoScreenMixin",
     "vulture.VultureEatenBodyMixin",
-    "vulture.VultureHudMixin"
+    "vulture.VultureHudMixin",
+    "mystic.MysticShopMixin"
   ],
   "injectors": {
     "defaultRequire": 1
