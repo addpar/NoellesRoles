@@ -19,13 +19,16 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
+import net.minecraft.util.math.Vec3d;
 import org.agmas.noellesroles.Noellesroles;
 
 import java.util.ListIterator;
+import java.util.Objects;
 
 public class SeanceEffect extends StatusEffect {
     public SeanceEffect(){
     super(StatusEffectCategory.BENEFICIAL, 0xe9b8b3);
+
 
     }
 
@@ -43,14 +46,13 @@ public class SeanceEffect extends StatusEffect {
                 p.addStatusEffect(new StatusEffectInstance(StatusEffects.DARKNESS, 240, 30,false,false)); //never forget the duration is in TICKS
                 p.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 140, 20,false,false));
                 //KEEP THE onApplied AND ITEM EFFECTS SEPARATE AND SORTED. eg. the EFFECT causes glowing, the voices to actually be heard and the text saying so.
-
                 for (ServerPlayerEntity cPlayer : p.getServer().getPlayerManager().getPlayerList()) {
 
                     GameWorldComponent gwc = (GameWorldComponent) GameWorldComponent.KEY.get(cPlayer.getWorld());
 
                     if (cPlayer != p) {     //Plays the Sound seance sfx for everyone in the game
 
-                        cPlayer.networkHandler.sendPacket(new PlaySoundS2CPacket(Registries.SOUND_EVENT.getEntry(SoundEvents.BLOCK_END_PORTAL_SPAWN), SoundCategory.PLAYERS, p.getX(), p.getY(), p.getZ(), 0.6f, 0.6f, 0));
+                        cPlayer.networkHandler.sendPacket(new PlaySoundS2CPacket(Registries.SOUND_EVENT.getEntry(SoundEvents.BLOCK_END_PORTAL_SPAWN), SoundCategory.PLAYERS, cPlayer.getX(), cPlayer.getY(), cPlayer.getZ(), 0.5f, 0.6f, 0));
                     }
                     if (cPlayer!= p && !gwc.isRole(cPlayer, Noellesroles.MYSTIC) && GameFunctions.isPlayerSpectatingOrCreative(cPlayer)) {     //Alerts Dead Players of Seance
 
@@ -64,5 +66,20 @@ public class SeanceEffect extends StatusEffect {
             }
 
         }
+
+    }
+    @Override
+    public boolean canApplyUpdateEffect(int duration, int amplifier) {
+        return true;
+    }
+    @Override
+    public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
+       if (!Objects.equals(entity.getMovement(), new Vec3d(0, 0, 0))){ //if velocity not zero... then make it so.
+           entity.setVelocity(0,0,0);
+        }
+
+
+
+        return super.applyUpdateEffect(entity, amplifier);
     }
 }

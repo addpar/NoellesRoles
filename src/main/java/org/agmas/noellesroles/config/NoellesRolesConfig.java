@@ -53,7 +53,7 @@ public class NoellesRolesConfig {
     public int roleMinePrice = 100;
 
     @SerialEntry(comment = "Price of the Mystic's Crystal Ball.")
-    public int crystalBallPrice = 150;
+    public int crystalBallPrice = 300;
 
     @SerialEntry(comment = "Price of the Mystic's Crystal Ball.")
     public int maximumCrystalBalls = 0;
