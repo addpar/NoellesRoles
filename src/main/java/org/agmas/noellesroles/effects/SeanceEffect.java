@@ -36,12 +36,12 @@ public class SeanceEffect extends StatusEffect {
             PlayerEntity player = (PlayerEntity) entity; //theres some redundancy here BUT dont care
             if (player instanceof ServerPlayerEntity){
                 ServerPlayerEntity p = (ServerPlayerEntity) player; //p for ServerPlayerEntity and player for PlayerEntity (They do different things but to the same player)
-                p.networkHandler.sendPacket(new OverlayMessageS2CPacket(Text.of("The Voices of The Dead Reach You for A Limited Time!")));
+                p.networkHandler.sendPacket(new OverlayMessageS2CPacket(Text.of("The voices of the dead reach you for a limited time!")));
                 //because overlay, titles, and other bs has to be packets sent through networkHandler. kms
 
-                p.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 240, 0, false, true));
+                p.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 240, 0, false, false));
                 p.addStatusEffect(new StatusEffectInstance(StatusEffects.DARKNESS, 240, 30,false,false)); //never forget the duration is in TICKS
-                p.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 80, 20,false,false));
+                p.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 140, 20,false,false));
                 //KEEP THE onApplied AND ITEM EFFECTS SEPARATE AND SORTED. eg. the EFFECT causes glowing, the voices to actually be heard and the text saying so.
 
                 for (ServerPlayerEntity cPlayer : p.getServer().getPlayerManager().getPlayerList()) {
