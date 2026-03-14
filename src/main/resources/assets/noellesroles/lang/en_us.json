@@ -13,9 +13,11 @@
   "announcement.goals.noellesroles.conductor": "Use the master key to open up every door on the train!",
   "announcement.role.noellesroles.conductor": "Conductor",
 
-  "announcement.goals.noellesroles.mystic": "You can speak to the voices beyond.",
+  "announcement.goals.noellesroles.mystic": "Your Crystal Ball allows you to speak to the voices beyond.",
   "announcement.role.noellesroles.mystic": "Mystic",
 
+  "announcement.goals.noellesroles.the_insane_damned_paranoid_killer": "I hear dead people.",
+  "announcement.role.noellesroles.the_insane_damned_paranoid_killer": "The Insane Damned Paranoid Killer Of Doom Death Destruction And Waffles",
 
   "announcement.goals.noellesroles.bartender": "See players that drink through walls!",
   "announcement.role.noellesroles.bartender": "Bartender",

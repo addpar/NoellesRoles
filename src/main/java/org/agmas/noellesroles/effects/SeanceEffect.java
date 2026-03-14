@@ -40,7 +40,7 @@ public class SeanceEffect extends StatusEffect {
                 //because overlay, titles, and other bs has to be packets sent through networkHandler. kms
 
                 p.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 240, 0, false, true));
-                p.addStatusEffect(new StatusEffectInstance(StatusEffects.DARKNESS, 120, 30,false,false)); //never forget the duration is in TICKS
+                p.addStatusEffect(new StatusEffectInstance(StatusEffects.DARKNESS, 240, 30,false,false)); //never forget the duration is in TICKS
                 p.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 80, 20,false,false));
                 //KEEP THE onApplied AND ITEM EFFECTS SEPARATE AND SORTED. eg. the EFFECT causes glowing, the voices to actually be heard and the text saying so.
 

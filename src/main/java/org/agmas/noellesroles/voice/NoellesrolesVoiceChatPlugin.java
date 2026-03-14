@@ -34,7 +34,7 @@ public class NoellesrolesVoiceChatPlugin implements VoicechatPlugin {
         GameWorldComponent gameWorldComponent = (GameWorldComponent) GameWorldComponent.KEY.get(spectator.getWorld());
         if (spectator.interactionManager.getGameMode().equals(GameMode.SPECTATOR)) {
             spectator.getWorld().getPlayers().forEach((p) -> {
-                if (gameWorldComponent.isRole(p, Noellesroles.MYSTIC) && GameFunctions.isPlayerAliveAndSurvival(p)&& p.hasStatusEffect(Registries.STATUS_EFFECT.getEntry(Seance))) { // Please change from glowing later
+                if (gameWorldComponent.isRole(p, Noellesroles.MYSTIC) && GameFunctions.isPlayerAliveAndSurvival(p)&& p.hasStatusEffect(Registries.STATUS_EFFECT.getEntry(Seance))) {
                     if (spectator.distanceTo(p) <= api.getVoiceChatDistance()) {
                         VoicechatConnection con = api.getConnectionOf(p.getUuid());
                         api.sendLocationalSoundPacketTo(con, event.getPacket().locationalSoundPacketBuilder()
@@ -43,6 +43,22 @@ public class NoellesrolesVoiceChatPlugin implements VoicechatPlugin {
                                         .build());
                     }
                 }
+
+            });
+
+            //Someone smarter than me fix this thanks.
+
+            spectator.getWorld().getPlayers().forEach((p) -> {
+                if (gameWorldComponent.isRole(p, Noellesroles.THE_INSANE_DAMNED_PARANOID_KILLER_OF_DOOM_DEATH_DESTRUCTION_AND_WAFFLES) && GameFunctions.isPlayerAliveAndSurvival(p)) { // Please change from glowing later
+                    if (spectator.distanceTo(p) <= api.getVoiceChatDistance()) {
+                        VoicechatConnection con = api.getConnectionOf(p.getUuid());
+                        api.sendLocationalSoundPacketTo(con, event.getPacket().locationalSoundPacketBuilder()
+                                .position(api.createPosition(p.getX(), p.getY(), p.getZ()))
+                                .distance((float)api.getVoiceChatDistance())
+                                .build());
+                    }
+                }
+
             });
         }
     }
