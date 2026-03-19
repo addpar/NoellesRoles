@@ -7,6 +7,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.effect.*;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
 import net.minecraft.network.packet.s2c.play.OverlayMessageS2CPacket;
 import net.minecraft.network.packet.s2c.play.PlaySoundS2CPacket;
 import net.minecraft.network.packet.s2c.play.SubtitleS2CPacket;
@@ -39,7 +40,8 @@ public class SeanceEffect extends StatusEffect {
             PlayerEntity player = (PlayerEntity) entity; //theres some redundancy here BUT dont care
             if (player instanceof ServerPlayerEntity){
                 ServerPlayerEntity p = (ServerPlayerEntity) player; //p for ServerPlayerEntity and player for PlayerEntity (They do different things but to the same player)
-                p.networkHandler.sendPacket(new OverlayMessageS2CPacket(Text.of("The voices of the dead reach you for a limited time!")));
+                p.networkHandler.sendPacket(new SubtitleS2CPacket(Text.of("The voices of the dead reach you for a limited time!")));
+                p.networkHandler.sendPacket(new TitleS2CPacket(Text.of(" ")));
                 //because overlay, titles, and other bs has to be packets sent through networkHandler. kms
 
                 p.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 240, 0, false, false));
@@ -56,7 +58,8 @@ public class SeanceEffect extends StatusEffect {
                     }
                     if (cPlayer!= p && !gwc.isRole(cPlayer, Noellesroles.MYSTIC) && GameFunctions.isPlayerSpectatingOrCreative(cPlayer)) {     //Alerts Dead Players of Seance
 
-                        cPlayer.networkHandler.sendPacket(new OverlayMessageS2CPacket(Text.of("The Mystic can hear the dead!")));
+                        cPlayer.networkHandler.sendPacket(new SubtitleS2CPacket(Text.of("The Mystic can hear the dead!")));
+                        cPlayer.networkHandler.sendPacket(new TitleS2CPacket(Text.of(" ")));
                     }
 
                 }
